@@ -14,7 +14,10 @@ import path from 'path'
 import Client from 'cabal-client';
 // require('random-access-idb')('dbname')
 
-const storage = rai('pool6')
+import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
+
+
+const storage = rai('pool')
 
 const core = hypercore(storage, {valueEncoding: 'json'})
 const cache = []
@@ -69,7 +72,7 @@ function Peers () {
     // console.log(cabalDetails)
      cabalDetails.on('new-message', ({ channel, author, message }) => {
        console.log(author)
-       console.log('Recieved: "' + message.value.content.text + '" in channel ' + channel + " from " + author.key.substring(0,5)
+       console.log('Recieved: "' + message.value.content.text + '" in channel ' + channel + " from " + author.key.substring(0,5))
 
        if(channel == 'data'){
          cache.push({user: author, data: parseFloat(message.value.content.text)})
@@ -169,6 +172,7 @@ function Peers () {
 
   return (
     <div>
+    <button ><Link to="/">home</Link></button>
       <p style={{color: 'slatedarkgrey', textAlign: 'center'}}>gather</p>
       <p style={{color: 'grey', textAlign: 'center', cursor: 'pointer'}} onClick={() => {navigator.clipboard.writeText(pool)}}>{pool}</p>
       {/*<p style={{color: 'grey', textAlign: 'center'}}>gæther</p>*/}
@@ -267,7 +271,7 @@ var _thisA;
 var stateA = {};
 var writeCharac;
 
-class BlueberryWebBluetoothA{
+class BlueberryWebBluetoothA {
   constructor(name){
     _thisA = this;
     this.name = name;
@@ -410,3 +414,4 @@ class BlueberryWebBluetoothA{
     _thisA.onStateChangeCallback = callback;
   }
 }
+
