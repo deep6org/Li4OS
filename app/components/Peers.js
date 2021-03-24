@@ -4,50 +4,51 @@ import React, { useEffect, useState } from 'react'
 import crypto from 'crypto'
 
 // import hypeswarm from 'hyperswarm'
-import hypercore from 'hypercore'
-import rai from 'random-access-idb'
 import CsvDownload from 'react-json-to-csv'
 import Overlay from './Overlay';
-import { homedir } from 'os'
-import path from 'path'
 
-import Client from 'cabal-client';
+// import hypercore from 'hypercore'
+// import rai from 'random-access-idb'
+// import { homedir } from 'os'
+// import path from 'path'
+
+// import Client from 'cabal-client';
 // require('random-access-idb')('dbname')
 
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 
 
-const storage = rai('pool')
+// const storage = rai('pool')
 
-const core = hypercore(storage, {valueEncoding: 'json'})
-const cache = []
-// setInterval(() => {
- // core.append({val: Math.random()})
-// }, 2000) 
+// const core = hypercore(storage, {valueEncoding: 'json'})
+// const cache = []
+// // setInterval(() => {
+//  // core.append({val: Math.random()})
+// // }, 2000) 
 
-const DEFAULT_CHANNEL = 'default'
-const HOME_DIR = homedir()
-const DATA_DIR = path.join(HOME_DIR, '.cabal-desktop', `v${Client.getDatabaseVersion()}`)
-const DATA_DIR_REMOTE = path.join(HOME_DIR, '.cabal-desktop-remote', `v${Client.getDatabaseVersion()}`)
-const STATE_FILE = path.join(DATA_DIR, 'cabals.json')
-const DEFAULT_PAGE_SIZE = 100
-const MAX_FEEDS = 1000
+// const DEFAULT_CHANNEL = 'default'
+// const HOME_DIR = homedir()
+// const DATA_DIR = path.join(HOME_DIR, '.cabal-desktop', `v${Client.getDatabaseVersion()}`)
+// const DATA_DIR_REMOTE = path.join(HOME_DIR, '.cabal-desktop-remote', `v${Client.getDatabaseVersion()}`)
+// const STATE_FILE = path.join(DATA_DIR, 'cabals.json')
+// const DEFAULT_PAGE_SIZE = 100
+// const MAX_FEEDS = 1000
 
-const client = new Client({
-  maxFeeds: MAX_FEEDS,
-  config: {
-    dbdir: DATA_DIR
-  },
-})
+// const client = new Client({
+//   maxFeeds: MAX_FEEDS,
+//   config: {
+//     dbdir: DATA_DIR
+//   },
+// })
 
-const remoteClient = new Client({
-  maxFeeds: MAX_FEEDS,
-  config: {
-    dbdir: DATA_DIR_REMOTE
-  },
-})
+// const remoteClient = new Client({
+//   maxFeeds: MAX_FEEDS,
+//   config: {
+//     dbdir: DATA_DIR_REMOTE
+//   },
+// })
 
-let cabal;
+// let cabal;
 
 function Peers () {
 

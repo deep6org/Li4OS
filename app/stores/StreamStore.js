@@ -9,10 +9,12 @@ class StreamStore {
   @observable blueberry = null;
   @observable isPairing = false;
   @observable name = null;
+  @observable rootStore = null;
 
-  constructor() {
+  constructor(rootStore) {
     console.log('creating store')
     makeAutoObservable(this);
+    this.rootStore = rootStore;
   }
 
   @action 
@@ -22,11 +24,12 @@ class StreamStore {
     this.setIsPairing(true);
     this.blueberry.connect()
     this.blueberry.onStateChange((state) => {
-      console.log(this.isPaired)
       if(!this.isPaired) {
           this.isPaired = true;
       }
-      console.log(state)
+      this.rootStore.cabalStore.pushState(state)
+      
+      // console.log(state)
     });
   }
 
@@ -40,6 +43,9 @@ class StreamStore {
   setIsPairing = (val) => {
     this.isPairing = val;
   }
+
+  // load cabals
+
 }
 
 export { StreamStore };

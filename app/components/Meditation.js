@@ -10,6 +10,8 @@ class Meditation extends Component {
 			<>
 				<p>meditation</p>
 				<button ><Link to="/">home</Link></button>
+				<button >join</button>
+				<button onClick={this.props.appStore.cabalStore.createCabal}>host</button>
 			</>
 		)
 	}
