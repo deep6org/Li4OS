@@ -1,49 +1,45 @@
-import { action, autorun, observable } from "mobx";
+import { action, autorun, observable, makeAutoObservable } from "mobx";
 
 import BlueberryConnect from '../utils/BlueberryConnect';
 
 class StreamStore {
 
   @observable value = 0;
-  @observable paired = true;
+  @observable isPaired = false;
   @observable blueberry = null;
   @observable isPairing = false;
+  @observable name = null;
 
   constructor() {
     console.log('creating store')
-    this.blueberry = new BlueberryConnect('blueberry-aa')
+    makeAutoObservable(this);
   }
 
   @action 
-  pair() {
+  pair = () => {
+    this.blueberry = new BlueberryConnect(this.name)
     console.log('pairing')
     this.setIsPairing(true);
     this.blueberry.connect()
+    this.blueberry.onStateChange((state) => {
+      console.log(this.isPaired)
+      if(!this.isPaired) {
+          this.isPaired = true;
+      }
+      console.log(state)
+    });
   }
 
   @action
-  setIsPairing(val){
-    console.log(val)
+  setName = (name) => {
+    console.log(name)
+    this.name = name;
+  }
+
+  @action
+  setIsPairing = (val) => {
     this.isPairing = val;
   }
-
-  @action 
-  change(value) {
-      this.value += value;
-      console.log(this.value)
-  }
-
-  @action 
-  increment() {
-    console.log('chain')
-    this.change(1);
-  }
-
-  @action 
-  decrement() {
-    this.change(-1);
-  }
-
 }
 
 export { StreamStore };

@@ -23,8 +23,8 @@ body {
 }
 
 .react-p5 {
-  /*float: left;*/
-    /*padding: 30px;*/
+  float: left;
+  padding: 40px;
 }
 button {
   background-color: white;
@@ -84,4 +84,13 @@ a:hover {
 
 .title {
   text-align: center;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+}
+
+.nav-button {
+  width: 110px;
 }
