@@ -5,6 +5,7 @@ local-first p2p bench for digital mindfulness using blueberry
 ## technology stack
 - react
 - electron
+- mobx
 - p5
 - hypercore / cabal
 - blueberry
