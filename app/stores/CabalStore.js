@@ -52,31 +52,57 @@ const remoteClient = new Client({
 class CabalStore {
 
   @observable cabal = null;
+  @observable loadedSession = 'data';
+  @observable sessions = []
 
   constructor() {
     makeAutoObservable(this);
-  }
 
-  @action
-  pushState = (state) => {
-  	if(this.cabal) {
-	  	this.cabal.publishMessage({
-	      type: 'chat/text',
-	      content: {
-	        text: "" + state.fNIRS.L1,
-	        channel: 'data'
-	      }
-	    })
-  	}
+    setTimeout(() => {
+    	console.log('time')
+    	if (this.cabal) {
+
+    		console.log(this.cabal.getJoinedChannels())
+    	} else{
+    		console.log('no channels')
+    	}
+    }, 2000)
   }
 
 	@action
-  setNick = (nick) => {
-    console.log(nick)
-  }
+	pushState = (state) => {
+		if(this.cabal) {
+			this.cabal.publishMessage({
+				type: 'chat/text',
+				content: {
+					text: "" + state.fNIRS.L1, // TODO: change data type to number
+					channel: this.intendedSession
+				}
+			})
+		}
+	}
+
 
 	@action
-	createCabal = () => {
+	setSession = (session) => {
+		console.log(session)
+		this.intendedSession = session
+		// join or create a channel
+
+		this.cabal.joinChannel(this.intendedSession)
+		this.sessions = this.cabal.getJoinedChannels()
+		// setTimeout(() => {
+		// 	console.log(this.cabal.getJoinedChannels())
+		// }, 2000)
+	}	
+
+	@action
+	setNick = (nick) => {
+		console.log(nick)
+	}
+
+	@action
+	createGather = () => {
 
 		client.createCabal().then((cabal) => {
 			this.cabal = cabal
